@@ -4,11 +4,11 @@ import pandas as pd
 import time
 import tkinter as tk
 import sqlite3
+from pandastable import Table, TableModel
 
 class Tareas:
     
     def encriptar_sha1(self, key):
-        #encriptar con sha1
         sha1 = hashlib.sha1()
         sha1.update(key.encode('utf-8'))
         return sha1.hexdigest()
@@ -92,14 +92,25 @@ class Tareas:
                 )
         tk.Label(root, text='Prueba Python ZINOBE - Urley Said Rey Velandia',
                 font = ('Helvetica', 14, 'bold'),
-
                 ).pack()        
         tk.Label(root, text=data_pandas,
                 font = ('Helvetica', 10),
                 anchor='e',
                 justify = tk.LEFT).pack()
         
-        table = tk.Text(root)
-        table.insert(tk.INSERT, df.to_string(index=False))
-        table.pack(fill="both", expand=True)
+        table = DataFrameTable(root, df)
         root.mainloop()    
+
+
+class DataFrameTable(tk.Frame):
+    def __init__(self, parent=None, df=pd.DataFrame()):
+        super().__init__()
+        self.parent = parent
+        self.pack(fill=tk.BOTH, expand=True)
+        self.table = Table(
+            self, dataframe=df,
+            showtoolbar=False,
+            showstatusbar=True,
+            editable=False)
+        self.table.show()
+                
