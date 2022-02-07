@@ -11,7 +11,7 @@
 
 * Para ejecutar las pruebas unitarias desarrolladas se debe ejecutar el archivo testing.py usando el comando:
 <pre>
-  python testing.py
+  python testing.py -v
 </pre>
 
 * Asi mismo, las funciones que cumplen con los requerimientos de la prueba fueron desarrolladas en el archivo tareas.py
